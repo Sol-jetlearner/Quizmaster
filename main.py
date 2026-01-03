@@ -49,17 +49,43 @@ def move_marquee():
     if marquee_box.right<0:
         marquee_box.left=WIDTH
 
+question_file_name="Quiz master\questions.txt"
+questions=[]
+question_count=0
+question_index=0
+
 def read_question_file():
-    pass
+    global question_count,questions
+    q_file=open(question_file_name,"r")
+    for question in q_file:
+        questions.append(question)
+        question_count+=1
+    q_file.close()
 
 def read_next_ques():
-    pass
+    global question_index
+    question_index += 1
+    return questions.pop(0).split("|")
 
-def on_mouse_down():
-    pass
+def on_mouse_down(pos):
+    index=1
+    for box in answer_boxes:
+        if box.collidepoint(pos):
+            if index == int(question[5]):
+                correct_answer()
+            else:
+                game_over()
+    if skip_box.collidepoint(pos):
+        skip_question()
 
 def correct_answer():
-    pass
+    global score,question,time_left,questions
+    score += 1
+    if questions:
+        question = read_next_ques()
+        time_left = 10
+    else:
+        game_over()
 
 def game_over():
     pass
@@ -71,3 +97,4 @@ def update_time_left():
     pass
 
 pgzrun.go()
+
