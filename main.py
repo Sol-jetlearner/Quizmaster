@@ -5,26 +5,49 @@ HEIGHT=700
 marquee_box=Rect(0,0,800,60)
 question_box=Rect(20,80,500,140)
 timer_box=Rect(570,80,140,140)
-skip_box=Rect()
-ans_box1=Rect()
-ans_box2=Rect()
-ans_box3=Rect()
-ans_box4=Rect()
+skip_box=Rect(550,275,175,315)
+ans_box1=Rect(40,275,200,140)
+ans_box2=Rect(40,450,200,140)
+ans_box3=Rect(260,275,200,140)
+ans_box4=Rect(260,450,200,140)
 
-#answer_boxes=[ans_box1,ans_box2,ans_box3,ans_box4]
+answer_boxes=[ans_box1,ans_box2,ans_box3,ans_box4]
 def draw():
     screen.fill("black")
-    screen.draw.filled_rect(marquee_box,"blue")
+    screen.draw.filled_rect(marquee_box,"black")
     screen.draw.filled_rect(question_box,"red")
     screen.draw.filled_rect(timer_box,"purple")
+    screen.draw.filled_rect(skip_box,"yellow")
+    #to add answer boxes
+    for ans_box in answer_boxes:
+        screen.draw.filled_rect(ans_box,"orange")
 
+    #adding text to marquee box
+    marquee_message="Welcome to Quiz Master"
+    marquee_message += f"Q:{question_index} of {question_count}"
+    screen.draw.textbox(marquee_message, marquee_box, color="white")
 
+    #adding text to the timer box
+    #screen.draw.textbox(str(time_left), timer_box, color="white", shadow=(0.5,0.5),shadowcolor="grey")
 
+    #adding a text to a skip box
+    screen.draw.textbox("skip", skip_box, color="black", angle=-90)
+    
+    #adding text to the question box
+    screen.draw.textbox(question[0].strip(), question_box, color="white", shadow=(0.5,0.5), shadowcolor="dim grey")
+
+    #adding text to the answer boxes
+    index=1
+    for ans_box in answer_boxes:
+        screen.draw.textbox(question[index].strip(), ans_box, color="black")
+        index = index + 1 
 def update():
-    pass
+    move_marquee()
 
 def move_marquee():
-    pass
+    marquee_box.x-=2
+    if marquee_box.right<0:
+        marquee_box.left=WIDTH
 
 def read_question_file():
     pass
