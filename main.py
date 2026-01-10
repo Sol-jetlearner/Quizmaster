@@ -12,6 +12,11 @@ ans_box3=Rect(260,275,200,140)
 ans_box4=Rect(260,450,200,140)
 
 answer_boxes=[ans_box1,ans_box2,ans_box3,ans_box4]
+score = 0
+is_game_over = False
+marquee_message = ""
+time_left=10
+
 def draw():
     screen.fill("black")
     screen.draw.filled_rect(marquee_box,"black")
@@ -25,16 +30,20 @@ def draw():
     #adding text to marquee box
     marquee_message="Welcome to Quiz Master"
     marquee_message += f"Q:{question_index} of {question_count}"
-    screen.draw.textbox(marquee_message, marquee_box, color="white")
+    screen.draw.textbox(marquee_message, marquee_box, 
+                        color="white")
 
     #adding text to the timer box
-    #screen.draw.textbox(str(time_left), timer_box, color="white", shadow=(0.5,0.5),shadowcolor="grey")
+    screen.draw.textbox(str(time_left), timer_box, color="white", shadow=(0.5,0.5),scolor="grey")
 
     #adding a text to a skip box
-    screen.draw.textbox("skip", skip_box, color="black", angle=-90)
+    screen.draw.textbox("skip", skip_box, color="black", 
+                        angle=-90)
     
     #adding text to the question box
-    screen.draw.textbox(question[0].strip(), question_box, color="white", shadow=(0.5,0.5), shadowcolor="dim grey")
+    screen.draw.textbox(question[0].strip(), question_box, 
+            color="white", shadow=(0.5,0.5), 
+            scolor="dim grey")
 
     #adding text to the answer boxes
     index=1
@@ -88,13 +97,29 @@ def correct_answer():
         game_over()
 
 def game_over():
-    pass
+    global question,time_left,is_game_over
+    message = f"Game over!\nYou got {score} questions correct!"
+    question = [message,"-","-","-","-",5]
+    time_left = 0
+    is_game_over = True
 
 def skip_question():
-    pass
+    global question,time_left
+    if questions and not is_game_over:
+        question=read_next_ques()
+        time_left=10
+    else:
+        game_over()
 
 def update_time_left():
-    pass
+    global time_left
+    if time_left:
+        time_left=time_left-1
+    else:
+        game_over()
+
+read_question_file()
+question = read_next_ques()
+clock.schedule_interval(update_time_left,1)
 
 pgzrun.go()
-
