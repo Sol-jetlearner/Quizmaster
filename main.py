@@ -20,9 +20,9 @@ time_left=10
 def draw():
     screen.fill("black")
     screen.draw.filled_rect(marquee_box,"black")
-    screen.draw.filled_rect(question_box,"red")
+    screen.draw.filled_rect(question_box,"blue")
     screen.draw.filled_rect(timer_box,"purple")
-    screen.draw.filled_rect(skip_box,"yellow")
+    screen.draw.filled_rect(skip_box,"green")
     #to add answer boxes
     for ans_box in answer_boxes:
         screen.draw.filled_rect(ans_box,"orange")
@@ -58,7 +58,7 @@ def move_marquee():
     if marquee_box.right<0:
         marquee_box.left=WIDTH
 
-question_file_name="Quiz master\questions.txt"
+question_file_name="C:\\Users\\shint\\Desktop\\Game DEv 1\\Quiz master\\questions.txt"
 questions=[]
 question_count=0
 question_index=0
@@ -84,7 +84,7 @@ def on_mouse_down(pos):
                 correct_answer()
             else:
                 game_over()
-            Index=index+1
+        index=index+1
     if skip_box.collidepoint(pos):
         skip_question()
 
@@ -125,3 +125,29 @@ clock.schedule_interval(update_time_left,1)
 
 pgzrun.go()
 
+
+
+
+                                                                                                  
+                                                                                                   
+
+
+
+
+
+
+
+                                                                                                          
+                                                                                                                            
+                                                                                                                     
+                                                                                                                 
+                                                                                                                  
+                                                                                                           
+                                                                                                    
+                                                                                                                      
+                                                                                                             
+                                                                                                                  
+                                                                                                         
+                                                                                         
+                                                                                      
+                                                                  
